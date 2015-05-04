@@ -1,0 +1,1174 @@
+<!DOCTYPE html><html xmlns:msxsl="urn:schemas-microsoft-com:xslt">
+	<head>
+		<meta content="en-us" http-equiv="Content-Language" /><meta content="text/html; charset=utf-16" http-equiv="Content-Type" /><title _locID="PortabilityAnalysis0">
+			.NET Portability Report
+		</title><style>
+			/* Body style, for the entire document */
+body
+{
+    background: #F3F3F4;
+    color: #1E1E1F;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+/* Header1 style, used for the main title */
+h1
+{
+    padding: 10px 0px 10px 10px;
+    font-size: 21pt;
+    background-color: #E2E2E2;
+    border-bottom: 1px #C1C1C2 solid; 
+    color: #201F20;
+    margin: 0;
+    font-weight: normal;
+}
+
+/* Header2 style, used for "Overview" and other sections */
+h2
+{
+    font-size: 18pt;
+    font-weight: normal;
+    padding: 15px 0 5px 0;
+    margin: 0;
+}
+
+/* Header3 style, used for sub-sections, such as project name */
+h3
+{
+    font-weight: normal;
+    font-size: 15pt;
+    margin: 0;
+    padding: 15px 0 5px 0;
+    background-color: transparent;
+}
+
+/* Color all hyperlinks one color */
+a
+{
+    color: #1382CE;
+}
+
+/* Table styles */ 
+table
+{
+    border-spacing: 0 0;
+    border-collapse: collapse;
+    font-size: 10pt;
+}
+
+table th
+{
+    background: #E7E7E8;
+    text-align: left;
+    text-decoration: none;
+    font-weight: normal;
+    padding: 3px 6px 3px 6px;
+}
+
+table td
+{
+    vertical-align: top;
+    padding: 3px 6px 5px 5px;
+    margin: 0px;
+    border: 1px solid #E7E7E8;
+    background: #F7F7F8;
+}
+
+/* Local link is a style for hyperlinks that link to file:/// content, there are lots so color them as 'normal' text until the user mouse overs */
+.localLink
+{
+    color: #1E1E1F;
+    background: #EEEEED;
+    text-decoration: none;
+}
+
+.localLink:hover
+{
+    color: #1382CE;
+    background: #FFFF99;
+    text-decoration: none;
+}
+
+/* Center text, used in the over views cells that contain message level counts */ 
+.textCentered
+{
+    text-align: center;
+}
+
+/* The message cells in message tables should take up all avaliable space */
+.messageCell
+{
+    width: 100%;
+}
+
+/* Padding around the content after the h1 */ 
+#content 
+{
+    padding: 0px 12px 12px 12px; 
+}
+
+/* The overview table expands to width, with a max width of 97% */ 
+#overview table
+{
+    width: auto;
+    max-width: 75%; 
+}
+
+/* The messages tables are always 97% width */
+#messages table
+{
+    width: 97%;
+}
+
+/* All Icons */
+.IconSuccessEncoded, .IconInfoEncoded, .IconWarningEncoded, .IconErrorEncoded
+{
+    min-width:18px;
+    min-height:18px; 
+    background-repeat:no-repeat;
+    background-position:center;
+}
+
+/* Success icon encoded */
+.IconSuccessEncoded
+{
+    /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+    /* [---XsltValidateInternal-Base64EncodedImage:IconSuccess#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABPElEQVR4Xp1Tv0vDUBi8FqeA4NpBcBLcWnQSApncOnTo4FSnjP0DsnXpH5CxiwbHDg4Zuj4oOEXiJgiC4FDcCkLWmIMc1Pfw+eMgQ77v3Xf3Pe51YKGqqisAEwCR1TIAsiAIblSo6xrdHeJR85Xle3mdmCQKb0PsfqyxxzM8K15HZADl/H5+sHpZwYfxyRjTs+kWwKBx8yoHd2mRiuzF8mkJniWH/13u3Fjrs/EdhsdDFHGB/DLXEJBDLh1MWPAhPo1BLB4WX5yQywHR+m3tVe/t97D52CB/ziG0nIgD/qDuYg8WuCcVZ2YGwlJ3YDugkpR/VNcAEx6GEKhERSr71FuO4YCM4XBdwKvecjIlkSnsO0Hyp/GxSeJAdzBKzpOtnPwyyiPdAZhpZptT04tU+zk7s8czeges//s5C5+CwqrR4/gw+AAAAABJRU5ErkJggg==);
+}
+
+/* Information icon encoded */
+.IconInfoEncoded
+{
+    /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+    /* [---XsltValidateInternal-Base64EncodedImage:IconInformation#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHElEQVR4Xs2TsUoDQRRF7wwoziokjZUKadInhdhukR9YP8DMX1hYW+QvdsXa/QHBbcXC7W0CamWTQnclFutceIQJwwaWNLlwm5k5d94M76mmaeCrrmsLYOocY12FcxZFUeozCqKqqgYA8uevv1H6VuPxcwlfk5N92KHBxfFeCSAxxswlYAW/Xr989x/mv9gkhtyMDhcAxgzRsp7flj8B/HF1RsMXq+NZMkopaHe7lbKxQUEIGbKsYNoGn969060hZBkQex/W8oRQwsQaW2o3Ago2SVcJUzAgY3N0lTCZZm+zPS8HB51gMmS1DEYyOz9acKO1D8JWTlafKIMxdhvlfdyT94Vv5h7P8Ky7nQzACmhvKq3zk3PjW9asz9D/1oigecsioooAAAAASUVORK5CYII=);
+}
+
+/* Warning icon encoded */
+.IconWarningEncoded
+{
+    /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+    /* [---XsltValidateInternal-Base64EncodedImage:IconWarning#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAx0lEQVR4XpWSMQ7CMAxFf4xAyBMLCxMrO8dhaBcuwdCJS3RJBw7SA/QGTCxdWJgiQYWKXJWKIXHIlyw5lqr34tQgEOdcBsCOx5yZK3hCCKdYXneQkh4pEfqzLfu+wVDSyyzFoJjfz9NB+pAF+eizx2Vruts0k15mPgvS6GYvpVtQhB61IB/dk6AF6fS4Ben0uIX5odtFe8Q/eW1KvFeH4e8khT6+gm5B+t3juyDt7n0jpe+CANTd+oTUjN/U3yVaABnSUjFz/gFq44JaVSCXeQAAAABJRU5ErkJggg==);
+}
+
+/* Error icon encoded */
+.IconErrorEncoded
+{
+    /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+    /* [---XsltValidateInternal-Base64EncodedImage:IconError#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABQElEQVR4XqWTvUoEQRCE6wYPZUA80AfwAQz23uCMjA7MDRQEIzPBVEyNTQUFIw00vcQTTMzuAh/AxEQQT8HF/3G/oGGnEUGuoNnd6qoZuqltyKEsyzVJq5I6rnUp6SjGeGhESikzzlc1eL7opfuVbrqbU1Zw9NCgtQMaZpY0eNnaaL2fHusvTK5vKu7sjSS1Y4y3QUA6K3e3Mau5UFDyMP7tYF9o8cAHZv68vipoIJg971PZIZ5HiwdvYGGvFVFHmGmZ2MxwmQYPXubPl9Up0tfoMQGetXd6mRbvhBw+boZ6WF7Mbv1+GsHRk0fQmPAH1GfmZirbCfDJ61tw3Px8/8pZsPAG4jlVhcPgZ7adwNWBB68lkRQWFiTgFlbnLY3DGGM7izIJIyT/jjIvEJw6fdJTc6krDzh6aMwMP9bvDH4ADSsa9uSWVJkAAAAASUVORK5CYII=);
+}
+		</style>
+	</head><body>
+		<h1 _locid="PortabilityReport">
+			.NET Portability Report
+		</h1><div id="content">
+			<h2 _locid="SummaryTitle">
+				<a name="Summary"></a>Summary
+			</h2><div id="summary">
+				<table>
+					<tbody>
+						<tr>
+							<th>Assembly</th><th>.NET Framework 4.6</th><th>ASP.NET 5 1.0</th><th>Mono 4.5</th>
+						</tr><tr>
+							<td><strong><a href="#Castle.Core">Castle.Core</a></strong></td><td class="textCentered">100%</td><td class="textCentered">85.9%</td><td class="textCentered">99.31%</td>
+						</tr><tr>
+							<td><strong><a href="#Moq">Moq</a></strong></td><td class="textCentered">100%</td><td class="textCentered">93.6%</td><td class="textCentered">98.86%</td>
+						</tr>
+					</tbody>
+				</table>
+			</div><div id="details">
+				<a name="Castle.Core"></a><h3>
+					Castle.Core
+				</h3><table>
+					<tbody>
+						<tr>
+							<th>Target type</th><th>.NET Framework 4.6</th><th>ASP.NET 5 1.0</th><th>Mono 4.5</th><th>Recommended changes</th>
+						</tr><tr>
+							<td>System.ComponentModel.BindingList`1</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">EndNew(System.Int32)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">add_AddingNew(System.ComponentModel.AddingNewEventHandler)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">ResetBindings</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_AllowNew(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">add_ListChanged(System.ComponentModel.ListChangedEventHandler)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_AllowNew</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">CancelNew(System.Int32)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">AddNew</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">remove_AddingNew(System.ComponentModel.AddingNewEventHandler)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_AllowEdit(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_AllowRemove(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">remove_ListChanged(System.ComponentModel.ListChangedEventHandler)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_AllowRemove</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_RaiseListChangedEvents</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Collections.Generic.IList{`0})</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">ResetItem(System.Int32)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_AllowEdit</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_RaiseListChangedEvents(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Type</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsNestedAssembly</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsNestedAssembly</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsNestedAssembly</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsPrimitive</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsPrimitive</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsVisible</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsVisible</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsPublic</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsPublic</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsSerializable</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsSerializable</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetInterfaceMap(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsSealed</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsSealed</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsInterface</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsInterface</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsValueType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsValueType</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsClass</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsClass</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsNestedPublic</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsNestedPublic</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_GUID</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsNestedFamORAssem</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsNestedFamORAssem</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsGenericTypeDefinition</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsGenericTypeDefinition</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_BaseType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().BaseType</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_DeclaringMethod</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetGenericParameterConstraints</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().GetGenericParameterConstraints()</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsImport</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsImport</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Assembly</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().Assembly</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_UnderlyingSystemType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Find member and use appropriate invocation method based off BindingFlags values used in original call  (varies by type of member)</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsGenericType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsGenericType</td>
+						</tr><tr>
+							<td style="padding-left:2em">IsSubclassOf(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsSubclassOf</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetConstructor(System.Reflection.BindingFlags,System.Reflection.Binder,System.Type[],System.Reflection.ParameterModifier[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use GetConstructor(Type[]) to search for public constructors by parameter type or filter the results of GetConstructors(BindingFlags) using LINQ for other queries.</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetMethod(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Type[],System.Reflection.ParameterModifier[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use GetMethod(string, Type[]) to search for public methods by name and parameter type or filter the results of GetMethods(BindingFlags) using LINQ for other queries.</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_ContainsGenericParameters</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().ContainsGenericParameters</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetInterface(System.String,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Enumerate across TypeInfo.ImplementedInterfaces</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsEnum</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsEnum</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsAbstract</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsAbstract</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_GenericParameterAttributes</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.IBindingList</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsSorted</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">RemoveIndex(System.ComponentModel.PropertyDescriptor)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">RemoveSort</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Find(System.ComponentModel.PropertyDescriptor,System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_SortDirection</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">add_ListChanged(System.ComponentModel.ListChangedEventHandler)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_SupportsSearching</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_AllowEdit</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">AddIndex(System.ComponentModel.PropertyDescriptor)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_SortProperty</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_AllowNew</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_SupportsChangeNotification</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">AddNew</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_SupportsSorting</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_AllowRemove</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.PropertyInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.GetMethod property</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetGetMethod</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.GetMethod property</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetSetMethod</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.SetMethod property</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetGetMethod(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.GetMethod property</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetSetMethod(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.SetMethod property</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Serialization.Formatters.Binary.BinaryFormatter</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Serialize(System.IO.Stream,System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Deserialize(System.IO.Stream)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Diagnostics.EventLog</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">CreateEventSource(System.Diagnostics.EventSourceCreationData)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Log</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">WriteEntry(System.String,System.Diagnostics.EventLogEntryType)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">CreateEventSource(System.String,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">SourceExists(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Source</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_MachineName</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.String,System.String,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_Source(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use EventSource type instead which now supports channels, enabling logging ETW events to the event log.  Currently there is no other workaround, but we are working on it. Please check back.</td>
+						</tr><tr>
+							<td style="padding-left:2em">SourceExists(System.String,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Close</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.PermissionSet</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">AddPermission(System.Security.IPermission)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Security.Permissions.PermissionState)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">IsSubsetOf(System.Security.PermissionSet)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Attribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use System.Reflection.CustomAttributeExtensions.IsDefined() in System.Reflection.Extensions</td>
+						</tr><tr>
+							<td style="padding-left:2em">IsDefined(System.Reflection.MemberInfo,System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use System.Reflection.CustomAttributeExtensions.IsDefined() in System.Reflection.Extensions</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttribute(System.Reflection.MemberInfo,System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Remoting.RemotingServices</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">IsTransparentProxy(System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetRealProxy(System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.SerializableAttribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove this attribute</td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove this attribute</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.ISupportInitialize</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">BeginInit</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">EndInit</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.StrongNameKeyPair</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Byte[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.NonSerializedAttribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove this attribute</td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.CustomAttributeData</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Constructor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttributes(System.Reflection.ParameterInfo)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttributes(System.Reflection.MemberInfo)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Serialization.IDeserializationCallback</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">OnDeserialization(System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Remoting.IRemotingTypeInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">CanCastTo(System.Type,System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.Permissions.SecurityPermissionFlag</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ContextBoundObject</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Net.Mail.MailMessage</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Dispose</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.String,System.String,System.String,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Xml.Xsl.IXsltContextVariable</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsParam</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsLocal</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Text.Encoding</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use GetEncoding(0)</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Default</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use GetEncoding(0)</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.AppDomain</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_CurrentDomain</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_BaseDirectory</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Currently there is no workaround, but we are working on it. Please check back.</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_PermissionSet</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.Emit.TypeBuilder</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">CreateType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.PropertyDescriptorCollection</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Find(System.String,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Xml.Xsl.XsltContext</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">CompareDocument(System.String,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Whitespace</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">PreserveWhitespace(System.Xml.XPath.XPathNavigator)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">ResolveVariable(System.String,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Xml.NameTable)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Diagnostics.Debugger</td><td class="IconSuccessEncoded"></td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsAttached</td><td class="IconSuccessEncoded"></td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Diagnostics.EventLogEntryType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use EventSource type instead which now supports channels, enabling logging ETW events to the event log.  Currently there is no other workaround, but we are working on it. Please check back.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.Permissions.SecurityPermission</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Security.Permissions.SecurityPermissionFlag)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.CustomAttributeNamedArgument</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_MemberInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.IDataErrorInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Item(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.AddingNewEventArgs</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_NewObject(System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.IRaiseItemChangedEvents</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_RaisesItemChangedEvents</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Configuration.ConfigurationErrorsException</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use configuration appropriate for your application model.  For portable Framework Components, expose API for configuration on type</td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Array</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use foreach statement with custom conversion code to handle conversion.</td>
+						</tr><tr>
+							<td style="padding-left:2em">ConvertAll``2(``0[],System.Converter{``0,``1})</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use foreach statement with custom conversion code to handle conversion.</td>
+						</tr><tr>
+							<td style="padding-left:2em">AsReadOnly``1(``0[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>create a new System.Collections.ObjectModel.ReadOnlyCollection<T> using the Array as arguments</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Net.Mail.SendCompletedEventHandler</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Object,System.IntPtr)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Net.Mail.SmtpClient</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_Credentials(System.Net.ICredentialsByHost)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">remove_SendCompleted(System.Net.Mail.SendCompletedEventHandler)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_Timeout(System.Int32)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Send(System.Net.Mail.MailMessage)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">add_SendCompleted(System.Net.Mail.SendCompletedEventHandler)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.String,System.Int32)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_EnableSsl(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">SendAsync(System.Net.Mail.MailMessage,System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Collections.Specialized.NameValueCollection</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.ListChangedEventArgs</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.ComponentModel.ListChangedType,System.Int32)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_ListChangedType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_NewIndex</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.ComponentModel.ListChangedType,System.Int32,System.ComponentModel.PropertyDescriptor)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Xml.XmlWriter</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use Dispose() instead.</td>
+						</tr><tr>
+							<td style="padding-left:2em">Close</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use Dispose() instead.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Diagnostics.EventSourceCreationData</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.String,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_MachineName(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Exception</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove.  Ctor overload taking SerializationInfo is not applicable in new surface area</td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove.  Ctor overload taking SerializationInfo is not applicable in new surface area</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove.  Getting rid of other usage of SerializationInfo will remove the need for this method.</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>False positive (GetType() from Object is sufficient)</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.Permissions.PermissionState</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Enum</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetTypeCode</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.ParameterInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">IsDefined(System.Type,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetOptionalCustomModifiers</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetRequiredCustomModifiers</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.FieldInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsNotSerialized</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.Assembly</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttributes(System.Type,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Load(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>use Assembly.Load(new AssemblyName(string))</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetExecutingAssembly</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>typeof(CurrentType).GetTypeInfo().Assembly</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Threading.Thread</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use System.Globalization.CultureInfo.CurrentCulture</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_CurrentCulture</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use System.Globalization.CultureInfo.CurrentCulture</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetDomain</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Configuration.ConfigurationManager</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use configuration appropriate for your application model.  For portable Framework Components, expose API for configuration on type</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetSection(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage: track configuration via alternate means.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.ListChangedEventHandler</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Invoke(System.Object,System.ComponentModel.ListChangedEventArgs)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Object,System.IntPtr)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Converter`2</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage.  Implement conversion code yourself if needed.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.Emit.AssemblyBuilder</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">DefineDynamicModule(System.String,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Save(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">DefineDynamicModule(System.String,System.String,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Xml.Xsl.IXsltContextFunction</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Remoting.Proxies.RealProxy</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Xml.XmlNode</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">CreateNavigator</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Serialization.FormatterServices</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetSerializableMembers(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetSafeUninitializedObject(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">PopulateObjectMembers(System.Object,System.Reflection.MemberInfo[],System.Object[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.SecuritySafeCriticalAttribute</td><td class="IconSuccessEncoded"></td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.ICustomAttributeProvider</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttributes(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttributes(System.Type,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.AssemblyName</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">set_KeyPair(System.Reflection.StrongNameKeyPair)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.Permissions.SecurityPermissionAttribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.Module</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">op_Inequality(System.Reflection.Module,System.Reflection.Module)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">op_Equality(System.Reflection.Module,System.Reflection.Module)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Serialization.SerializationInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove serialization constructors on custom Exception types</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetString(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove serialization constructors on custom Exception types</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetValue(System.String,System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>either 1) Delete Serialization info from exceptions (since this can't be remoted) or 2) Use a different serialization technology if not for exceptions.</td>
+						</tr><tr>
+							<td style="padding-left:2em">SetType(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">AddValue(System.String,System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove serialization constructors on custom Exception types</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.MemberInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>use "is FieldInfo", "is PropertyInfo", etc</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_MemberType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>use "is FieldInfo", "is PropertyInfo", etc</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_ReflectedType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage:  Use reference to object being reflected on to get this value instead.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.EventInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetAddMethod(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetRemoveMethod(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Delegate</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use MethodInfo.CreateDelegate</td>
+						</tr><tr>
+							<td style="padding-left:2em">CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use MethodInfo.CreateDelegate</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Method</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use System.Reflection.RuntimeReflectionExtensions.GetMethodInfo</td>
+						</tr><tr>
+							<td style="padding-left:2em">CreateDelegate(System.Type,System.Type,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use MethodInfo.CreateDelegate</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.AddingNewEventHandler</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Object,System.IntPtr)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.CodeAccessPermission</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td style="padding-left:2em">Demand</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.MethodBase</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCurrentMethod</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetMethodImplementationFlags</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Xml.XmlConvert</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">IsWhitespaceChar(System.Char)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">IsNCNameChar(System.Char)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">IsStartNCNameChar(System.Char)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.IPermission</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.MarshalByRefObject</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.ParameterModifier</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use an overload that does not take a ParameterModifier array.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.TypeDescriptor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetProperties(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.ICancelAddNew</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.SecurityRuleSet</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.ListChangedType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.ComponentModel.ListSortDirection</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Serialization.IObjectReference</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.MemberTypes</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use is operator.  Example:  if (membertype == membertypes.Field) --> if (member is FieldInfo)</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Serialization.ISerializable</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.SecurityRulesAttribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>There is only one security transparency model on non-desktop SKUs, so there's nothing to do with this attribute.  It should just be removed from non-desktop-fwk assemblies.</td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Security.SecurityRuleSet)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>There is only one security transparency model on non-desktop SKUs, so there's nothing to do with this attribute.  It should just be removed from non-desktop-fwk assemblies.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.IO.TextWriter</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use Dispose instead</td>
+						</tr><tr>
+							<td style="padding-left:2em">Close</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use Dispose instead</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.SecurityCriticalAttribute</td><td class="IconSuccessEncoded"></td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.TargetException</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Xml.XmlReader</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use Dispose() instead.</td>
+						</tr><tr>
+							<td style="padding-left:2em">Close</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use Dispose() instead.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.Binder</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use an overload that does not take a Binder.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr>
+					</tbody>
+				</table><a href="#Summary">Back to summary</a><a name="Moq"></a><h3>
+					Moq
+				</h3><table>
+					<tbody>
+						<tr>
+							<th>Target type</th><th>.NET Framework 4.6</th><th>ASP.NET 5 1.0</th><th>Mono 4.5</th><th>Recommended changes</th>
+						</tr><tr>
+							<td>System.Type</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsNestedAssembly</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsNestedAssembly</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsNestedAssembly</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsPrimitive</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsPrimitive</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsVisible</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsVisible</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsPublic</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsPublic</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsSerializable</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsSerializable</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetInterfaceMap(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsSealed</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsSealed</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsInterface</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsInterface</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsValueType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsValueType</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsClass</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsClass</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsNestedPublic</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsNestedPublic</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_GUID</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsNestedFamORAssem</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsNestedFamORAssem</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsGenericTypeDefinition</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsGenericTypeDefinition</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_BaseType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().BaseType</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_DeclaringMethod</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetGenericParameterConstraints</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().GetGenericParameterConstraints()</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsImport</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsImport</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Assembly</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().Assembly</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_UnderlyingSystemType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Find member and use appropriate invocation method based off BindingFlags values used in original call  (varies by type of member)</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsGenericType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsGenericType</td>
+						</tr><tr>
+							<td style="padding-left:2em">IsSubclassOf(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsSubclassOf</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetConstructor(System.Reflection.BindingFlags,System.Reflection.Binder,System.Type[],System.Reflection.ParameterModifier[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use GetConstructor(Type[]) to search for public constructors by parameter type or filter the results of GetConstructors(BindingFlags) using LINQ for other queries.</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetMethod(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Type[],System.Reflection.ParameterModifier[])</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use GetMethod(string, Type[]) to search for public methods by name and parameter type or filter the results of GetMethods(BindingFlags) using LINQ for other queries.</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_ContainsGenericParameters</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().ContainsGenericParameters</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetInterface(System.String,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Enumerate across TypeInfo.ImplementedInterfaces</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsEnum</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsEnum</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_IsAbstract</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>.GetTypeInfo().IsAbstract</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_GenericParameterAttributes</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.PropertyInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.GetMethod property</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetGetMethod</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.GetMethod property</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetSetMethod</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.SetMethod property</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetGetMethod(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.GetMethod property</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetSetMethod(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use PropertyInfo.SetMethod property</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Attribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use System.Reflection.CustomAttributeExtensions.IsDefined() in System.Reflection.Extensions</td>
+						</tr><tr>
+							<td style="padding-left:2em">IsDefined(System.Reflection.MemberInfo,System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use System.Reflection.CustomAttributeExtensions.IsDefined() in System.Reflection.Extensions</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttribute(System.Reflection.MemberInfo,System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.SerializableAttribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove this attribute</td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove this attribute</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.Emit.TypeBuilder</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">CreateType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.Permissions.ReflectionPermissionAttribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.Permissions.PermissionSetAttribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Diagnostics.StackTrace</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetFrames</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Exception</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove.  Ctor overload taking SerializationInfo is not applicable in new surface area</td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove.  Ctor overload taking SerializationInfo is not applicable in new surface area</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove.  Getting rid of other usage of SerializationInfo will remove the need for this method.</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>False positive (GetType() from Object is sufficient)</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.CodeDom.Compiler.CodeDomProvider</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetTypeOutput(System.CodeDom.CodeTypeReference)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.Assembly</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttributes(System.Type,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">Load(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>use Assembly.Load(new AssemblyName(string))</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetExecutingAssembly</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>typeof(CurrentType).GetTypeInfo().Assembly</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.ICustomAttributeProvider</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttributes(System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCustomAttributes(System.Type,System.Boolean)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.Permissions.SecurityPermissionAttribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Runtime.Serialization.SerializationInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove serialization constructors on custom Exception types</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetString(System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove serialization constructors on custom Exception types</td>
+						</tr><tr>
+							<td style="padding-left:2em">GetValue(System.String,System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>either 1) Delete Serialization info from exceptions (since this can't be remoted) or 2) Use a different serialization technology if not for exceptions.</td>
+						</tr><tr>
+							<td style="padding-left:2em">SetType(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">AddValue(System.String,System.Object)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove serialization constructors on custom Exception types</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.CodeDom.CodeTypeReference</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor(System.Type)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.Permissions.UIPermissionAttribute</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.MemberInfo</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>use "is FieldInfo", "is PropertyInfo", etc</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_MemberType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>use "is FieldInfo", "is PropertyInfo", etc</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_ReflectedType</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Remove usage:  Use reference to object being reflected on to get this value instead.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Delegate</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use MethodInfo.CreateDelegate</td>
+						</tr><tr>
+							<td style="padding-left:2em">CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use MethodInfo.CreateDelegate</td>
+						</tr><tr>
+							<td style="padding-left:2em">get_Method</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use System.Reflection.RuntimeReflectionExtensions.GetMethodInfo</td>
+						</tr><tr>
+							<td style="padding-left:2em">CreateDelegate(System.Type,System.Type,System.String)</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use MethodInfo.CreateDelegate</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>Microsoft.CSharp.CSharpCodeProvider</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Diagnostics.StackFrame</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetFileLineNumber</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetMethod</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetFileName</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.MethodBase</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetCurrentMethod</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">GetMethodImplementationFlags</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.ParameterModifier</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use an overload that does not take a ParameterModifier array.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.MemberTypes</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use is operator.  Example:  if (membertype == membertypes.Field) --> if (member is FieldInfo)</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Security.SecurityCriticalAttribute</td><td class="IconSuccessEncoded"></td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td style="padding-left:2em">#ctor</td><td class="IconSuccessEncoded"></td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td></td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr><tr>
+							<td>System.Reflection.Binder</td><td class="IconSuccessEncoded"></td><td class="IconErrorEncoded"></td><td class="IconSuccessEncoded"></td><td>Use an overload that does not take a Binder.</td>
+						</tr><tr>
+							<td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+						</tr>
+					</tbody>
+				</table><a href="#Summary">Back to summary</a>
+			</div>
